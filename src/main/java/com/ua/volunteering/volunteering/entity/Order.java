@@ -17,10 +17,19 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(mappedBy = "orders")
-    private List<Item> items = new ArrayList<>();
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "order_id")
+    private List<Clothes> clothes = new ArrayList<>();
 
-    public void addItem(Item item){
-        items.add(item);
-    }
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "order_id")
+    private List<Medicine> medicineList = new ArrayList<>();
+
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "order_id")
+    private List<ArmorVest> armorVestList = new ArrayList<>();
+
+//    public void add(Clothes clothes, Medicine medicine, ArmorVest armorVest){
+//        items.add(item);
+//    }
 }

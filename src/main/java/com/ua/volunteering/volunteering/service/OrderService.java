@@ -1,6 +1,5 @@
 package com.ua.volunteering.volunteering.service;
 
-import com.ua.volunteering.volunteering.entity.Item;
 import com.ua.volunteering.volunteering.entity.Order;
 
 import java.util.List;
