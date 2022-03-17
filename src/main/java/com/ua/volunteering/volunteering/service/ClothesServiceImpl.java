@@ -1,5 +1,6 @@
 package com.ua.volunteering.volunteering.service;
 
+
 import com.ua.volunteering.volunteering.entity.Clothes;
 import com.ua.volunteering.volunteering.exception.NotFoundException;
 import com.ua.volunteering.volunteering.repository.ClothesRepository;
@@ -30,9 +31,11 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Override
     public Clothes update(Long id, Clothes clothes) {
+        System.out.println(clothes.toString());
         Clothes updatedClothes = getById(id);
         updatedClothes.setName(clothes.getName());
         updatedClothes.setSize(clothes.getSize());
+//        updatedClothes.setOrder(clothes.getOrder());
         return clothesRepository.save(updatedClothes);
     }
 

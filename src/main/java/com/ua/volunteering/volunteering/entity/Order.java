@@ -1,6 +1,8 @@
 package com.ua.volunteering.volunteering.entity;
 
 import lombok.Data;
+import lombok.ToString;
+import net.bytebuddy.build.ToStringPlugin;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,19 +19,16 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER)
+    @ToString.Exclude
     @JoinColumn(name = "order_id")
-    private List<Clothes> clothes = new ArrayList<>();
+    private List<Clothes> clothes;
 
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "order_id")
-    private List<Medicine> medicineList = new ArrayList<>();
+    private List<Medicine> medicineList;
 
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "order_id")
-    private List<ArmorVest> armorVestList = new ArrayList<>();
-
-//    public void add(Clothes clothes, Medicine medicine, ArmorVest armorVest){
-//        items.add(item);
-//    }
+    private List<ArmorVest> armorVestList;
 }

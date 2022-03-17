@@ -31,9 +31,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order update(Long id, Order order) {
         Order updatedOrder = getById(id);
-        updatedOrder.setClothes(order.getClothes());
-        updatedOrder.setMedicineList(order.getMedicineList());
-        updatedOrder.setArmorVestList(order.getArmorVestList());
+        updatedOrder.setId(order.getId());
+//        updatedOrder.setClothes(order.getClothes());
+//        updatedOrder.setMedicineList(order.getMedicineList());
+//        updatedOrder.setArmorVestList(order.getArmorVestList());
         return orderRepository.save(updatedOrder);
     }
 
