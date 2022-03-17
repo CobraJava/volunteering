@@ -25,7 +25,7 @@ public class Clothes {
 
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    @JoinColumn(name = "order_id")
     private Order order;
 
 
