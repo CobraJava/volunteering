@@ -1,7 +1,6 @@
 package com.ua.volunteering.volunteering.service;
 
 import com.ua.volunteering.volunteering.entity.ArmorVest;
-import com.ua.volunteering.volunteering.entity.Clothes;
 import com.ua.volunteering.volunteering.exception.NotFoundException;
 import com.ua.volunteering.volunteering.repository.ArmorVestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,8 @@ public class ArmorVestServiceImpl implements ArmorVestService {
 
     @Override
     public ArmorVest save(ArmorVest armorVest) {
+        armorVest.setName(armorVest.getName());
+        armorVest.setProtection(armorVest.getProtection());
         return armorVestRepository.save(armorVest);
     }
 

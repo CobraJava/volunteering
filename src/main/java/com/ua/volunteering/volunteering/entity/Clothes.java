@@ -1,11 +1,10 @@
 package com.ua.volunteering.volunteering.entity;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -18,17 +17,16 @@ public class Clothes {
     private Long id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "size")
-    private String size;
+    @Enumerated(EnumType.STRING)
+    private Size size;
 
-    @ManyToOne
-    @ToString.Exclude
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-
+//    @ManyToOne
+//    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+//    private Order order;
 
 
 }

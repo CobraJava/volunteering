@@ -25,6 +25,8 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public Medicine save(Medicine medicine) {
+        medicine.setName(medicine.getName());
+        medicine.setDescription(medicine.getDescription());
         return medicineRepository.save(medicine);
     }
 

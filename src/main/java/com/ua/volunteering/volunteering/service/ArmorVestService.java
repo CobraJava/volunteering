@@ -1,7 +1,6 @@
 package com.ua.volunteering.volunteering.service;
 
 import com.ua.volunteering.volunteering.entity.ArmorVest;
-import com.ua.volunteering.volunteering.entity.Clothes;
 
 import java.util.List;
 
