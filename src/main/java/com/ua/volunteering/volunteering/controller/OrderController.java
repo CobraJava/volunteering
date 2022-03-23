@@ -22,9 +22,9 @@ public class OrderController {
 
     @PostMapping
     public Order create(@RequestBody Order order,
-                        @RequestParam(required = false) Set<Long> clothesId,
-                        @RequestParam(required = false) Set<Long> armorVestId,
-                        @RequestParam(required = false) Set<Long> medicineId) {
+                        @RequestParam(required = false, defaultValue = "") Set<Long> clothesId,
+                        @RequestParam(required = false, defaultValue = "") Set<Long> armorVestId,
+                        @RequestParam(required = false, defaultValue = "") Set<Long> medicineId) {
         return orderService.save(order,clothesId, armorVestId, medicineId);
     }
 
