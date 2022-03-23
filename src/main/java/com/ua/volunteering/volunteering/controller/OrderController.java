@@ -35,9 +35,9 @@ public class OrderController {
 
     @PutMapping("/{id}")
     public Order update(@PathVariable Long id,
-                        @RequestParam(required = false) Set<Long> clothesId,
-                        @RequestParam(required = false) Set<Long> armorVestId,
-                        @RequestParam(required = false) Set<Long> medicineId) {
+                        @RequestParam(required = false, defaultValue = "") Set<Long> clothesId,
+                        @RequestParam(required = false, defaultValue = "") Set<Long> armorVestId,
+                        @RequestParam(required = false, defaultValue = "") Set<Long> medicineId) {
         return orderService.update(id, clothesId, armorVestId, medicineId);
     }
 
