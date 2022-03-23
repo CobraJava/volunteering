@@ -5,12 +5,12 @@ INSERT INTO ORDERS (id) VALUES
 
 INSERT INTO CLOTHES (id, name, size, order_id) VALUES
 (1, 'T-shirt', 'L', 1),
-(2, 'Jacket', 'm', 1),
-(3, 'Hoodie', 's', 2),
-(4,'dddddd', 'L', 2),
-(5,'eeeeee', 'L', 3),
-(6,'fffffff', 'L', NULL),
-(7,'gggggg', 'L', NULL);
+(2, 'Jacket', 'XL', 1),
+(3, 'Hoodie', 'S', 2),
+(4,'Jeans', 'M', 2),
+(5,'Pants', 'XXL', 3),
+(6,'Socks', 'S', NULL),
+(7,'Parka', 'M', NULL);
 
 INSERT INTO ARMOR_VEST (id, name, protection, order_id) VALUES
 (1,'Model55', '5', 3),

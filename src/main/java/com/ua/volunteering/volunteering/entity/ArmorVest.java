@@ -1,8 +1,11 @@
 package com.ua.volunteering.volunteering.entity;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -15,8 +18,10 @@ public class ArmorVest {
     private Long id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "protection")
-    private String protection;
+    @NotNull
+    private Integer protection;
 }
