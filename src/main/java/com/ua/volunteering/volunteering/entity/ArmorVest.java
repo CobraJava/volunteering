@@ -1,15 +1,17 @@
 package com.ua.volunteering.volunteering.entity;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import javax.validation.constraints.Size;
 
 @Entity
 @Data
 @Table(name = "armor_vest")
+@Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class ArmorVest {
 
     @Id
