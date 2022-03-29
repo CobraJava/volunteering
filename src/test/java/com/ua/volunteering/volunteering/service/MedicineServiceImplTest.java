@@ -34,12 +34,7 @@ class MedicineServiceImplTest {
     private final long NOT_EXISTING_ID = 500L;
 
     private final String EXISTING_NAME = "Existing Name";
-//    private final String NOT_EXISTING_NAME = "Not Existing Name";
-//    private final String NEW_NAME = "New Name";
-
-    private final String EXISTING_DESC = "Existind description";
-//    private final String NOT_EXISTING_DESC = "Not existing description";
-//    private final String NEW_DESC = "New description";
+    private final String EXISTING_DESC = "Existing description";
 
     @BeforeEach
     void setUp() {

@@ -1,11 +1,8 @@
 package com.ua.volunteering.volunteering.service;
 
 import com.ua.volunteering.volunteering.entity.ArmorVest;
-import com.ua.volunteering.volunteering.entity.Clothes;
-import com.ua.volunteering.volunteering.entity.Size;
 import com.ua.volunteering.volunteering.exception.NotFoundException;
 import com.ua.volunteering.volunteering.repository.ArmorVestRepository;
-import com.ua.volunteering.volunteering.repository.ClothesRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,12 +34,8 @@ class ArmorVestServiceImplTest {
     private final long NOT_EXISTING_ID = 500L;
 
     private final String EXISTING_NAME = "Existing Name";
-//    private final String NOT_EXISTING_NAME = "Not Existing Name";
-//    private final String NEW_NAME = "New Name";
-
     private final int EXISTING_PROTECTION = 1;
-//    private final int NOT_EXISTING_PROTECTION = 25;
-//    private final int NEW_PROTECTION = 2;
+
 
     @BeforeEach
     void setUp() {
