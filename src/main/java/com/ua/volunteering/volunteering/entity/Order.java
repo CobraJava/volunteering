@@ -1,6 +1,6 @@
 package com.ua.volunteering.volunteering.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,6 +8,10 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "orders")
+@Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
 
     @Id

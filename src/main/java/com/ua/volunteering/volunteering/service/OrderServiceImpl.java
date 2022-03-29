@@ -41,9 +41,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order save(Order order, Set<Long> clothesId, Set<Long> armorVestId, Set<Long> medicineId) {
-        List<Clothes> clothes = clothesRepository.findAllById(clothesId);
         List<ArmorVest> armorVestList = armorVestRepository.findAllById(armorVestId);
         List<Medicine> medicineList = medicineRepository.findAllById(medicineId);
+        List<Clothes> clothes = clothesRepository.findAllById(clothesId);
         order.setClothes(clothes);
         order.setArmorVestList(armorVestList);
         order.setMedicineList(medicineList);

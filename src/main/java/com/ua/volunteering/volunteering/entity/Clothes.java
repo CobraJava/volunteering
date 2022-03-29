@@ -1,14 +1,17 @@
 package com.ua.volunteering.volunteering.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
 @Table(name = "clothes")
+@Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Clothes {
 
     @Id
@@ -22,9 +25,9 @@ public class Clothes {
 
     @Column(name = "size")
     @Enumerated(EnumType.STRING)
-    private Size size;
+    public Size size;
 
-//    @ManyToOne
+    //    @ManyToOne
 //    @JoinColumn(name = "order_id", insertable = false, updatable = false)
 //    private Order order;
 

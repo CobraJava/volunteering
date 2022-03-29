@@ -1,15 +1,17 @@
 package com.ua.volunteering.volunteering.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Data
 @Table(name = "medicine")
+@Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Medicine {
 
     @Id
