@@ -50,8 +50,11 @@ class OrderServiceImplTest {
     private final long EXISTING_ID = 1L;
     private final long NOT_EXISTING_ID = 500L;
 
-    private final Set<Long> CLOTHES_ID = Stream.of(1L, 2L, 3L).collect(Collectors.toSet());
+    private final Set<Long> CLOTHES_ID = Stream.of(1L, 2L).collect(Collectors.toSet());
+    private final Set<Long> NEW_CLOTHES_ID = Stream.of(1L,3L).collect(Collectors.toSet());
+
     private final List<Clothes> CLOTHES_LIST = Lists.list(Clothes.builder().id(1L).name("Jeans").size(Size.L).build(), Clothes.builder().id(2L).name("T-shirt").size(Size.S).build());
+    private final List<Clothes> NEW_CLOTHES_LIST = Lists.list(Clothes.builder().id(1L).name("Jeans").size(Size.L).build(), Clothes.builder().id(3L).name("T-shirt").size(Size.S).build());
 
     private final Set<Long> MEDICINE_ID = Stream.of(1L, 2L).collect(Collectors.toSet());
     private final List<Medicine> MEDICINE_LIST = Lists.list(Medicine.builder().id(1L).name("Paracetamol").description("any usage").build(), Medicine.builder().id(2L).name("Nurofen").description("any usage").build());
@@ -102,10 +105,10 @@ class OrderServiceImplTest {
     void updateOrderShouldReturnOrder() {
         when(orderRepository.findById(EXISTING_ID)).thenReturn(Optional.of(order));
         when(orderRepository.save(order)).thenReturn(order);
-        when(clothesRepository.findAllById(anyIterable())).thenReturn(CLOTHES_LIST);
+        when(clothesRepository.findAllById(anyIterable())).thenReturn(NEW_CLOTHES_LIST);
         when(medicineRepository.findAllById(anyIterable())).thenReturn(MEDICINE_LIST);
         when(armorVestRepository.findAllById(anyIterable())).thenReturn(ARMORVEST_LIST);
-        Order actual = orderService.update(EXISTING_ID, CLOTHES_ID, MEDICINE_ID, ARMORVEST_ID);
+        Order actual = orderService.update(EXISTING_ID, NEW_CLOTHES_ID, MEDICINE_ID, ARMORVEST_ID);
         assertEquals(actual, order);
         verify(orderRepository).save(order);
     }

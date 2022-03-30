@@ -30,10 +30,13 @@ class ArmorVestServiceImplTest {
 
     private ArmorVest armorVest;
 
+    private ArmorVest armorVestNew;
+
     private final long EXISTING_ID = 1L;
     private final long NOT_EXISTING_ID = 500L;
 
     private final String EXISTING_NAME = "Existing Name";
+    private final String NEW_NAME = "New Name";
     private final int EXISTING_PROTECTION = 1;
 
 
@@ -43,6 +46,11 @@ class ArmorVestServiceImplTest {
         armorVest = ArmorVest.builder()
                 .id(EXISTING_ID)
                 .name(EXISTING_NAME)
+                .protection(EXISTING_PROTECTION)
+                .build();
+        armorVestNew = ArmorVest.builder()
+                .id(EXISTING_ID)
+                .name(NEW_NAME)
                 .protection(EXISTING_PROTECTION)
                 .build();
     }
@@ -74,7 +82,7 @@ class ArmorVestServiceImplTest {
     void updateArmorVestShouldReturnArmorVest() {
         when(armorVestRepository.findById(EXISTING_ID)).thenReturn(Optional.of(armorVest));
         when(armorVestRepository.save(armorVest)).thenReturn(armorVest);
-        ArmorVest actual = armorVestService.update(EXISTING_ID, armorVest);
+        ArmorVest actual = armorVestService.update(EXISTING_ID, armorVestNew);
         assertEquals(actual, armorVest);
     }
 

@@ -31,10 +31,14 @@ class ClothesServiceImplTest {
 
     private Clothes clothes;
 
+    private Clothes clothesNew;
+
     private final long EXISTING_ID = 1L;
     private final long NOT_EXISTING_ID = 500L;
 
     private final String EXISTING_NAME = "Existing Name";
+    private final String NEW_NAME = "NEW Name";
+
 
     @BeforeEach
     void setUp() {
@@ -42,6 +46,12 @@ class ClothesServiceImplTest {
         clothes = Clothes.builder()
                 .id(EXISTING_ID)
                 .name(EXISTING_NAME)
+                .size(Size.L)
+                .build();
+
+        clothesNew = Clothes.builder()
+                .id(EXISTING_ID)
+                .name(NEW_NAME)
                 .size(Size.L)
                 .build();
 
@@ -74,7 +84,7 @@ class ClothesServiceImplTest {
     void updateClothesShouldReturnClothes() {
         when(clothesRepository.findById(EXISTING_ID)).thenReturn(Optional.of(clothes));
         when(clothesRepository.save(clothes)).thenReturn(clothes);
-        Clothes actual = clothesService.update(EXISTING_ID, clothes);
+        Clothes actual = clothesService.update(EXISTING_ID, clothesNew);
         assertEquals(actual, clothes);
     }
 
