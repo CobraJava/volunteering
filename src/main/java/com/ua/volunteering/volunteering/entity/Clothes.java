@@ -27,7 +27,7 @@ public class Clothes {
     @Enumerated(EnumType.STRING)
     public Size size;
 
-    //    @ManyToOne
+//    @OneToOne
 //    @JoinColumn(name = "order_id", insertable = false, updatable = false)
 //    private Order order;
 

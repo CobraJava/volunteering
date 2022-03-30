@@ -30,10 +30,13 @@ class MedicineServiceImplTest {
 
     private Medicine medicine;
 
+    private Medicine medicineNew;
+
     private final long EXISTING_ID = 1L;
     private final long NOT_EXISTING_ID = 500L;
 
     private final String EXISTING_NAME = "Existing Name";
+    private final String NEW_NAME = "New Name";
     private final String EXISTING_DESC = "Existing description";
 
     @BeforeEach
@@ -42,6 +45,12 @@ class MedicineServiceImplTest {
         medicine = Medicine.builder()
                 .id(EXISTING_ID)
                 .name(EXISTING_NAME)
+                .description(EXISTING_DESC)
+                .build();
+
+        medicineNew = Medicine.builder()
+                .id(EXISTING_ID)
+                .name(NEW_NAME)
                 .description(EXISTING_DESC)
                 .build();
 
@@ -74,7 +83,7 @@ class MedicineServiceImplTest {
     void updateMedicineShouldReturnMedicine() {
         when(medicineRepository.findById(EXISTING_ID)).thenReturn(Optional.of(medicine));
         when(medicineRepository.save(medicine)).thenReturn(medicine);
-        Medicine actual = medicineService.update(EXISTING_ID, medicine);
+        Medicine actual = medicineService.update(EXISTING_ID, medicineNew);
         assertEquals(actual, medicine);
     }
 
