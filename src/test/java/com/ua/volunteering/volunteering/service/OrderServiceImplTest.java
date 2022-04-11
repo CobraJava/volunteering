@@ -2,10 +2,7 @@ package com.ua.volunteering.volunteering.service;
 
 import com.ua.volunteering.volunteering.entity.*;
 import com.ua.volunteering.volunteering.exception.NotFoundException;
-import com.ua.volunteering.volunteering.repository.ArmorVestRepository;
-import com.ua.volunteering.volunteering.repository.ClothesRepository;
-import com.ua.volunteering.volunteering.repository.MedicineRepository;
-import com.ua.volunteering.volunteering.repository.OrderRepository;
+import com.ua.volunteering.volunteering.repository.*;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,30 +34,40 @@ class OrderServiceImplTest {
     private OrderRepository orderRepository;
 
     @Mock
-    private ClothesRepository clothesRepository;
+    private JacketRepository jacketRepository;
+
+    @Mock
+    private ShoesRepository shoesRepository;
+
+    @Mock
+    private FarmacetronRepository farmacetronRepository;
+
+    @Mock
+    private ParacetamolRepository paracetamolRepository;
 
     @Mock
     private ArmorVestRepository armorVestRepository;
-
-    @Mock
-    private MedicineRepository medicineRepository;
 
     private Order order;
 
     private final long EXISTING_ID = 1L;
     private final long NOT_EXISTING_ID = 500L;
 
-    private final Set<Long> CLOTHES_ID = Stream.of(1L, 2L).collect(Collectors.toSet());
-    private final Set<Long> NEW_CLOTHES_ID = Stream.of(1L,3L).collect(Collectors.toSet());
+    private final Set<Long> JACKET_ID = Stream.of(1L, 2L).collect(Collectors.toSet());
+    private final Set<Long> NEW_JACKET_ID = Stream.of(1L, 3L).collect(Collectors.toSet());
+    private final List<Jacket> JACKET_LIST = Lists.list(Jacket.builder().id(1L).name("Jacket").size(Size.L).orderId(1L).build(), Jacket.builder().id(2L).name("Jacket Vintage").size(Size.L).orderId(1L).build());
 
-    private final List<Clothes> CLOTHES_LIST = Lists.list(Clothes.builder().id(1L).name("Jeans").size(Size.L).build(), Clothes.builder().id(2L).name("T-shirt").size(Size.S).build());
-    private final List<Clothes> NEW_CLOTHES_LIST = Lists.list(Clothes.builder().id(1L).name("Jeans").size(Size.L).build(), Clothes.builder().id(3L).name("T-shirt").size(Size.S).build());
+    private final Set<Long> SHOES_ID = Stream.of(1L, 2L).collect(Collectors.toSet());
+    private final List<Shoes> SHOES_LIST = Lists.list(Shoes.builder().id(1L).name("New balance").sizeUK(39).orderId(1L).build(), Shoes.builder().id(2L).name("Adidas").sizeUK(44).orderId(1L).build());
 
-    private final Set<Long> MEDICINE_ID = Stream.of(1L, 2L).collect(Collectors.toSet());
-    private final List<Medicine> MEDICINE_LIST = Lists.list(Medicine.builder().id(1L).name("Paracetamol").description("any usage").build(), Medicine.builder().id(2L).name("Nurofen").description("any usage").build());
+    private final Set<Long> PARACETAMOL_ID = Stream.of(1L, 2L).collect(Collectors.toSet());
+    private final List<Paracetamol> PARACETAMOL_LIST = Lists.list(Paracetamol.builder().id(1L).name("Paracetamol").prescription("any usage").description("any usage").orderId(1L).build(), Paracetamol.builder().id(2L).name("Paracetamol2x").description("any usage").orderId(1L).build());
 
-    private final Set<Long> ARMORVEST_ID = Stream.of(1L, 2L, 3L).collect(Collectors.toSet());
-    private final List<ArmorVest> ARMORVEST_LIST = Lists.list(ArmorVest.builder().id(1L).name("Model55").protection(3).build(), ArmorVest.builder().id(2L).name("Model56").protection(4).build());
+    private final Set<Long> FARMACETRON_ID = Stream.of(1L, 2L).collect(Collectors.toSet());
+    private final List<Farmacetron> FARMACETRON_LIST = Lists.list(Farmacetron.builder().id(1L).name("Farmacetron").prescription("any usage").dosage("any dosage").orderId(1L).build(), Farmacetron.builder().id(2L).name("Farmacetron2x").dosage("any dosage").orderId(1L).build());
+
+    private final Set<Long> ARMORVEST_ID = Stream.of(1L, 2L).collect(Collectors.toSet());
+    private final List<ArmorVest> ARMORVEST_LIST = Lists.list(ArmorVest.builder().id(1L).name("Model55").protection(3).orderId(1L).build(), ArmorVest.builder().id(2L).name("Model56").protection(4).orderId(1L).build());
 
     @BeforeEach
     void setUp() {
@@ -68,8 +75,10 @@ class OrderServiceImplTest {
 
         order = Order.builder()
                 .id(EXISTING_ID)
-                .clothes(CLOTHES_LIST)
-                .medicineList(MEDICINE_LIST)
+                .jackets(JACKET_LIST)
+                .shoes(SHOES_LIST)
+                .paracetamolList(PARACETAMOL_LIST)
+                .farmacetronList(FARMACETRON_LIST)
                 .armorVestList(ARMORVEST_LIST)
                 .build();
 
@@ -93,22 +102,26 @@ class OrderServiceImplTest {
     @Test
     void createOrderShouldReturnOrder() {
         when(orderRepository.save(order)).thenReturn(order);
-        when(clothesRepository.findAllById(anyIterable())).thenReturn(CLOTHES_LIST);
-        when(medicineRepository.findAllById(anyIterable())).thenReturn(MEDICINE_LIST);
-        when(armorVestRepository.findAllById(anyIterable())).thenReturn(ARMORVEST_LIST);
-        Order actual = orderService.save(order, CLOTHES_ID, ARMORVEST_ID, MEDICINE_ID);
+        when(jacketRepository.findAllById(JACKET_ID)).thenReturn(JACKET_LIST);
+        when(shoesRepository.findAllById(SHOES_ID)).thenReturn(SHOES_LIST);
+        when(paracetamolRepository.findAllById(PARACETAMOL_ID)).thenReturn(PARACETAMOL_LIST);
+        when(farmacetronRepository.findAllById(FARMACETRON_ID)).thenReturn(FARMACETRON_LIST);
+        when(armorVestRepository.findAllById(ARMORVEST_ID)).thenReturn(ARMORVEST_LIST);
+        Order actual = orderService.save(JACKET_ID, SHOES_ID, PARACETAMOL_ID, FARMACETRON_ID, ARMORVEST_ID);
         assertEquals(actual, order);
-        verify(orderRepository).save(order);
+
     }
 
     @Test
     void updateOrderShouldReturnOrder() {
         when(orderRepository.findById(EXISTING_ID)).thenReturn(Optional.of(order));
         when(orderRepository.save(order)).thenReturn(order);
-        when(clothesRepository.findAllById(anyIterable())).thenReturn(NEW_CLOTHES_LIST);
-        when(medicineRepository.findAllById(anyIterable())).thenReturn(MEDICINE_LIST);
+        when(jacketRepository.findAllById(anyIterable())).thenReturn(JACKET_LIST);
+        when(shoesRepository.findAllById(anyIterable())).thenReturn(SHOES_LIST);
+        when(paracetamolRepository.findAllById(anyIterable())).thenReturn(PARACETAMOL_LIST);
+        when(farmacetronRepository.findAllById(anyIterable())).thenReturn(FARMACETRON_LIST);
         when(armorVestRepository.findAllById(anyIterable())).thenReturn(ARMORVEST_LIST);
-        Order actual = orderService.update(EXISTING_ID, NEW_CLOTHES_ID, MEDICINE_ID, ARMORVEST_ID);
+        Order actual = orderService.update(EXISTING_ID, NEW_JACKET_ID, SHOES_ID, PARACETAMOL_ID, FARMACETRON_ID, ARMORVEST_ID);
         assertEquals(actual, order);
         verify(orderRepository).save(order);
     }

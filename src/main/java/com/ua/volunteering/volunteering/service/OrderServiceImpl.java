@@ -1,37 +1,38 @@
 package com.ua.volunteering.volunteering.service;
 
-import com.ua.volunteering.volunteering.entity.ArmorVest;
-import com.ua.volunteering.volunteering.entity.Clothes;
-import com.ua.volunteering.volunteering.entity.Medicine;
-import com.ua.volunteering.volunteering.entity.Order;
+import com.ua.volunteering.volunteering.entity.*;
 import com.ua.volunteering.volunteering.exception.NotFoundException;
-import com.ua.volunteering.volunteering.repository.ArmorVestRepository;
-import com.ua.volunteering.volunteering.repository.ClothesRepository;
-import com.ua.volunteering.volunteering.repository.MedicineRepository;
-import com.ua.volunteering.volunteering.repository.OrderRepository;
+import com.ua.volunteering.volunteering.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-    private final ClothesRepository clothesRepository;
+    private final JacketRepository jacketRepository;
+
+    private final ShoesRepository shoesRepository;
 
     private final ArmorVestRepository armorVestRepository;
 
-    private final MedicineRepository medicineRepository;
+    private final ParacetamolRepository paracetamolRepository;
+
+    private final FarmacetronRepository farmacetronRepository;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, ClothesRepository clothesRepository, ArmorVestRepository armorVestRepository, MedicineRepository medicineRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, JacketRepository jacketRepository, ShoesRepository shoesRepository, ArmorVestRepository armorVestRepository, ParacetamolRepository paracetamolRepository, FarmacetronRepository farmacetronRepository) {
         this.orderRepository = orderRepository;
-        this.clothesRepository = clothesRepository;
+        this.jacketRepository = jacketRepository;
+        this.shoesRepository = shoesRepository;
         this.armorVestRepository = armorVestRepository;
-        this.medicineRepository = medicineRepository;
+        this.paracetamolRepository = paracetamolRepository;
+        this.farmacetronRepository = farmacetronRepository;
     }
 
     @Override
@@ -40,25 +41,34 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order save(Order order, Set<Long> clothesId, Set<Long> armorVestId, Set<Long> medicineId) {
-        List<ArmorVest> armorVestList = armorVestRepository.findAllById(armorVestId);
-        List<Medicine> medicineList = medicineRepository.findAllById(medicineId);
-        List<Clothes> clothes = clothesRepository.findAllById(clothesId);
-        order.setClothes(clothes);
+    public Order save(Set<Long> armorVestId, Set<Long> jacketId, Set<Long> shoesId, Set<Long> paracetamolId, Set<Long> farmacetromId) {
+        Order order = new Order();
+        List<ArmorVest> armorVestList = armorVestRepository.findAllById(armorVestId).stream().filter(armorVest -> armorVest.getOrderId()==null).collect(Collectors.toList());
+        List<Jacket> jackets = jacketRepository.findAllById(jacketId).stream().filter(jacket -> jacket.getOrderId()==null).collect(Collectors.toList());
+        List<Shoes> shoesList = shoesRepository.findAllById(shoesId).stream().filter(shoes -> shoes.getOrderId()==null).collect(Collectors.toList());
+        List<Paracetamol> paracetamolList = paracetamolRepository.findAllById(paracetamolId).stream().filter(paracetamol -> paracetamol.getOrderId()==null).collect(Collectors.toList());
+        List<Farmacetron> farmacetronList = farmacetronRepository.findAllById(farmacetromId).stream().filter(farmacetron -> farmacetron.getOrderId()==null).collect(Collectors.toList());
         order.setArmorVestList(armorVestList);
-        order.setMedicineList(medicineList);
+        order.setJackets(jackets);
+        order.setShoes(shoesList);
+        order.setParacetamolList(paracetamolList);
+        order.setFarmacetronList(farmacetronList);
         return orderRepository.save(order);
     }
 
     @Override
-    public Order update(Long id, Set<Long> clothesId, Set<Long> armorVestId, Set<Long> medicineId) {
+    public Order update(Long id, Set<Long> armorVestId, Set<Long> jacketId, Set<Long> shoesId, Set<Long> paracetamolId, Set<Long> farmacetromId) {
         Order updatedOrder = getById(id);
-        List<Clothes> clothes = clothesRepository.findAllById(clothesId);
-        List<ArmorVest> armorVestList = armorVestRepository.findAllById(armorVestId);
-        List<Medicine> medicineList = medicineRepository.findAllById(medicineId);
-        updatedOrder.setClothes(clothes);
-        updatedOrder.setMedicineList(medicineList);
+        List<ArmorVest> armorVestList = armorVestRepository.findAllById(armorVestId).stream().filter(armorVest -> armorVest.getOrderId()==null).collect(Collectors.toList());
+        List<Jacket> jackets = jacketRepository.findAllById(jacketId).stream().filter(jacket -> jacket.getOrderId()==null).collect(Collectors.toList());
+        List<Farmacetron> farmacetronList = farmacetronRepository.findAllById(farmacetromId).stream().filter(farmacetron -> farmacetron.getOrderId()==null).collect(Collectors.toList());
+        List<Paracetamol> paracetamolList = paracetamolRepository.findAllById(paracetamolId).stream().filter(paracetamol -> paracetamol.getOrderId()==null).collect(Collectors.toList());
+        List<Shoes> shoesList = shoesRepository.findAllById(shoesId).stream().filter(shoes -> shoes.getOrderId()==null).collect(Collectors.toList());
         updatedOrder.setArmorVestList(armorVestList);
+        updatedOrder.setJackets(jackets);
+        updatedOrder.setShoes(shoesList);
+        updatedOrder.setParacetamolList(paracetamolList);
+        updatedOrder.setFarmacetronList(farmacetronList);
         return orderRepository.save(updatedOrder);
     }
 
@@ -71,4 +81,6 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getAll() {
         return orderRepository.findAll();
     }
+
+
 }

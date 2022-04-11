@@ -38,6 +38,7 @@ class ArmorVestServiceImplTest {
     private final String EXISTING_NAME = "Existing Name";
     private final String NEW_NAME = "New Name";
     private final int EXISTING_PROTECTION = 1;
+    private final long EXISTING_ORDER_ID = 1L;
 
 
     @BeforeEach
@@ -47,11 +48,13 @@ class ArmorVestServiceImplTest {
                 .id(EXISTING_ID)
                 .name(EXISTING_NAME)
                 .protection(EXISTING_PROTECTION)
+                .orderId(EXISTING_ORDER_ID)
                 .build();
         armorVestNew = ArmorVest.builder()
                 .id(EXISTING_ID)
                 .name(NEW_NAME)
                 .protection(EXISTING_PROTECTION)
+                .orderId(EXISTING_ORDER_ID)
                 .build();
     }
 
@@ -87,7 +90,7 @@ class ArmorVestServiceImplTest {
     }
 
     @Test
-    void deleteArmorVestByCorrectIdShouldReturnArmorVest() {
+    void deleteArmorVestByCorrectIdShouldReturnVoid() {
         when(armorVestRepository.findById(EXISTING_ID)).thenReturn((Optional.of((armorVest))));
         armorVestService.delete(EXISTING_ID);
         verify(armorVestRepository).delete(armorVest);

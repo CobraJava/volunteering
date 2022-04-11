@@ -21,13 +21,22 @@ public class Order {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private List<Clothes> clothes;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private List<Medicine> medicineList;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
     private List<ArmorVest> armorVestList;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private List<Jacket> jackets;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private List<Shoes> shoes;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private List<Paracetamol> paracetamolList;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private List<Farmacetron> farmacetronList;
+
 }

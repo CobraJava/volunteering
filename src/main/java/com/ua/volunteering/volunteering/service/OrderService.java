@@ -9,9 +9,9 @@ public interface OrderService {
 
     Order getById(Long id);
 
-    Order save(Order order, Set<Long> clothesId, Set<Long> armorVestId, Set<Long> medicineId);
+    Order save(Set<Long> armorVestId, Set<Long> jacketId, Set<Long> shoesId, Set<Long> paracetamolId, Set<Long> farmacetromId);
 
-    Order update(Long id, Set<Long> clothesId, Set<Long> armorVestId, Set<Long> medicineId);
+    Order update(Long id, Set<Long> armorVestId, Set<Long> jacketId, Set<Long> shoesId, Set<Long> paracetamolId, Set<Long> farmacetromId);
 
     void delete(Long id);
 
