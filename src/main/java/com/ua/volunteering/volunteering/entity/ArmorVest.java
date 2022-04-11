@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Data
 @Table(name = "armor_vest")
 @Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArmorVest {
@@ -26,4 +25,7 @@ public class ArmorVest {
     @Column(name = "protection")
     @NotNull
     private Integer protection;
+
+    @Column(name = "order_id")
+    private Long orderId;
 }

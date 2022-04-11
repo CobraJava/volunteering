@@ -1,6 +1,5 @@
 package com.ua.volunteering.volunteering.controller;
 
-import com.ua.volunteering.volunteering.entity.Clothes;
 import com.ua.volunteering.volunteering.entity.Order;
 import com.ua.volunteering.volunteering.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +20,13 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order create(@RequestBody Order order,
-                        @RequestParam(required = false, defaultValue = "") Set<Long> clothesId,
-                        @RequestParam(required = false, defaultValue = "") Set<Long> armorVestId,
-                        @RequestParam(required = false, defaultValue = "") Set<Long> medicineId) {
-        return orderService.save(order,clothesId, armorVestId, medicineId);
+    public Order create(
+            @RequestParam(required = false, defaultValue = "") Set<Long> armorVestId,
+            @RequestParam(required = false, defaultValue = "") Set<Long> jacketId,
+            @RequestParam(required = false, defaultValue = "") Set<Long> shoesId,
+            @RequestParam(required = false, defaultValue = "") Set<Long> paracetamolId,
+            @RequestParam(required = false, defaultValue = "") Set<Long> farmacetronId) {
+        return orderService.save(armorVestId, jacketId, shoesId, paracetamolId, farmacetronId);
     }
 
     @GetMapping
@@ -35,10 +36,12 @@ public class OrderController {
 
     @PutMapping("/{id}")
     public Order update(@PathVariable Long id,
-                        @RequestParam(required = false, defaultValue = "") Set<Long> clothesId,
                         @RequestParam(required = false, defaultValue = "") Set<Long> armorVestId,
-                        @RequestParam(required = false, defaultValue = "") Set<Long> medicineId) {
-        return orderService.update(id, clothesId, armorVestId, medicineId);
+                        @RequestParam(required = false, defaultValue = "") Set<Long> jacketId,
+                        @RequestParam(required = false, defaultValue = "") Set<Long> shoesId,
+                        @RequestParam(required = false, defaultValue = "") Set<Long> paracetamolId,
+                        @RequestParam(required = false, defaultValue = "") Set<Long> farmacetronId) {
+        return orderService.update(id, armorVestId, jacketId, shoesId, paracetamolId, farmacetronId);
     }
 
     @DeleteMapping("/{id}")

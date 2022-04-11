@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ArmorVestServiceImpl implements ArmorVestService {
+public class ArmorVestServiceImpl implements BaseService<ArmorVest> {
 
     private final ArmorVestRepository armorVestRepository;
 
@@ -27,6 +27,7 @@ public class ArmorVestServiceImpl implements ArmorVestService {
     public ArmorVest save(ArmorVest armorVest) {
         armorVest.setName(armorVest.getName());
         armorVest.setProtection(armorVest.getProtection());
+        armorVest.setOrderId(armorVest.getOrderId());
         return armorVestRepository.save(armorVest);
     }
 
@@ -35,6 +36,7 @@ public class ArmorVestServiceImpl implements ArmorVestService {
         ArmorVest updatedArmorVest = getById(id);
         updatedArmorVest.setName(armorVest.getName());
         updatedArmorVest.setProtection(armorVest.getProtection());
+        updatedArmorVest.setOrderId(armorVest.getOrderId());
         return armorVestRepository.save(updatedArmorVest);
     }
 

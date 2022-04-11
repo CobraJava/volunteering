@@ -5,11 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@MappedSuperclass
 @Data
-@Table(name = "medicine")
-@Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class Medicine {
@@ -23,8 +20,8 @@ public class Medicine {
     @NotNull
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "prescription")
     @NotNull
-    private String description;
+    private String prescription;
 
 }

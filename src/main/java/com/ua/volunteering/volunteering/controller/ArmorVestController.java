@@ -2,7 +2,7 @@ package com.ua.volunteering.volunteering.controller;
 
 
 import com.ua.volunteering.volunteering.entity.ArmorVest;
-import com.ua.volunteering.volunteering.service.ArmorVestService;
+import com.ua.volunteering.volunteering.service.ArmorVestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +12,10 @@ import java.util.List;
 @RequestMapping("/armor_vest")
 public class ArmorVestController {
 
-    private final ArmorVestService armorVestService;
+    private final ArmorVestServiceImpl armorVestService;
 
     @Autowired
-    public ArmorVestController(ArmorVestService armorVestService) {
+    public ArmorVestController(ArmorVestServiceImpl armorVestService) {
         this.armorVestService = armorVestService;
     }
 
